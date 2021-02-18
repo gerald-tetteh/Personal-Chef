@@ -21,8 +21,16 @@ class _HomePageState extends State<HomePage> {
   final _bottomNaviagtionItems = [
     BottomNavigationBarItem(
       label: "",
-      activeIcon: Icon(Icons.favorite_border_rounded),
-      icon: Icon(Icons.favorite_border_rounded),
+      activeIcon: Icon(
+        HomePage.isAndroid
+            ? Icons.favorite_border_rounded
+            : CupertinoIcons.suit_heart,
+      ),
+      icon: Icon(
+        HomePage.isAndroid
+            ? Icons.favorite_border_rounded
+            : CupertinoIcons.suit_heart,
+      ),
     ),
     BottomNavigationBarItem(
       label: "",
@@ -35,8 +43,16 @@ class _HomePageState extends State<HomePage> {
     ),
     BottomNavigationBarItem(
       label: "",
-      activeIcon: Icon(Icons.support_agent_outlined),
-      icon: Icon(Icons.support_agent_outlined),
+      activeIcon: Icon(
+        HomePage.isAndroid
+            ? Icons.support_agent_outlined
+            : CupertinoIcons.info_circle,
+      ),
+      icon: Icon(
+        HomePage.isAndroid
+            ? Icons.support_agent_outlined
+            : CupertinoIcons.info_circle,
+      ),
     ),
   ];
 

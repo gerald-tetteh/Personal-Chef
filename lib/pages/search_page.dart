@@ -3,11 +3,15 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import "package:flutter/material.dart";
 import 'package:flutter/rendering.dart';
+import 'package:provider/provider.dart';
 
 import '../components/global/android_text_field.dart';
 import '../components/global/ios_text_field.dart';
-import '../components/search_page/search_grid_item.dart';
+import '../components/search_page/search_grid.dart';
 import '../utils/default_util.dart';
+import '../utils/text_util.dart';
+import '../components/search_page/seach_list.dart';
+import '../providers/RecipeProvider.dart';
 
 class SearchPage extends StatelessWidget {
   final _isAndroid = Platform.isAndroid;
@@ -36,7 +40,10 @@ class SearchPage extends StatelessWidget {
                       mainAxisSize: MainAxisSize.max,
                       children: [
                         Container(
-                          child: Text("What to eat?"),
+                          child: Text(
+                            "What to eat?",
+                            style: TextUtil.lightHeader,
+                          ),
                           margin: const EdgeInsets.only(bottom: 10),
                         ),
                         _isAndroid
@@ -52,31 +59,16 @@ class SearchPage extends StatelessWidget {
               height: constraints.maxHeight * 0.78,
               width: constraints.maxWidth,
               child: Center(
-                child: CustomScrollView(
-                  slivers: [
-                    SliverGrid(
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        childAspectRatio: 1,
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 10,
-                        mainAxisSpacing: 13,
-                        mainAxisExtent:
-                            ((constraints.maxHeight * 0.78) - (13 * 3)) / 3,
-                      ),
-                      delegate: SliverChildBuilderDelegate(
-                        (ctx, index) {
-                          final itemDetails =
-                              DefaultUtil.categories[_categoryKeys[index]];
-                          return SearchGridItem(
-                            color: itemDetails[0],
-                            imagePath: itemDetails[1],
-                            text: _categoryKeys[index],
-                          );
-                        },
-                        childCount: 6,
-                      ),
-                    ),
-                  ],
+                child: Consumer(
+                  builder: (context, RecipeProvider consumerprovider, child) {
+                    print(consumerprovider.recipes);
+                    return consumerprovider.recipes.isEmpty
+                        ? SearchGrid(
+                            categoryKeys: _categoryKeys,
+                            constraints: constraints,
+                          )
+                        : SearchList(recipes: consumerprovider.recipes);
+                  },
                 ),
               ),
             ),
