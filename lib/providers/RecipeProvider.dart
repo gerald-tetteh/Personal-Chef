@@ -9,13 +9,23 @@ import '../../hiddenDetails.dart';
 class RecipeProvider with ChangeNotifier {
   List<Recipe> _recipes = [];
   List<Recipe> get recipes => [..._recipes];
+  set setRecipes(List<Recipe> list) {
+    _recipes = list;
+    notifyListeners();
+  }
+
+  bool _isLoading = false;
+  bool get isLoading => _isLoading;
+  set isLoading(bool value) {
+    _isLoading = value;
+    notifyListeners();
+  }
 
   Future<void> complexSearch(String keyword) async {
     if (keyword.trim().isEmpty) {
-      _recipes = [];
-      notifyListeners();
       return;
     }
+    isLoading = true;
     var searchUrl =
         "https://api.spoonacular.com/recipes/complexSearch?query=${Uri.encodeFull(keyword)}&number=100&apiKey=${HiddenDetails.apikey}";
     try {
@@ -29,9 +39,10 @@ class RecipeProvider with ChangeNotifier {
           title: recipie["title"],
         );
       }).toList();
-      notifyListeners();
+      isLoading = false;
     } catch (e) {
       print(e.toString());
+      isLoading = false;
     }
   }
 }

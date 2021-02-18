@@ -5,19 +5,41 @@ import 'package:provider/provider.dart';
 import '../../utils/colors_util.dart';
 import '../../providers/RecipeProvider.dart';
 
-class IosTextField extends StatelessWidget {
+class IosTextField extends StatefulWidget {
   const IosTextField({
     Key key,
   }) : super(key: key);
 
+  @override
+  _IosTextFieldState createState() => _IosTextFieldState();
+}
+
+class _IosTextFieldState extends State<IosTextField> {
   Future<void> searchText(String text, RecipeProvider provider) async =>
       await provider.complexSearch(text);
+
+  final _controller = TextEditingController();
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<RecipeProvider>(context, listen: false);
     return CupertinoTextField(
-      onChanged: (enteredText) async => await searchText(enteredText, provider),
+      controller: _controller,
+      onChanged: (enteredText) {
+        if (enteredText.isEmpty) {
+          provider.setRecipes = [];
+        }
+      },
+      onEditingComplete: () async {
+        FocusScope.of(context).unfocus();
+        await searchText(_controller.text, provider);
+      },
       cursorColor: ColorUtil.green,
       placeholder: "Search",
       prefix: Padding(

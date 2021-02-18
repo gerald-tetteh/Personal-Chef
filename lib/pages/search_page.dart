@@ -61,7 +61,9 @@ class SearchPage extends StatelessWidget {
               child: Center(
                 child: Consumer(
                   builder: (context, RecipeProvider consumerprovider, child) {
-                    print(consumerprovider.recipes);
+                    if (consumerprovider.isLoading) {
+                      return CircularProgressIndicator();
+                    }
                     return consumerprovider.recipes.isEmpty
                         ? SearchGrid(
                             categoryKeys: _categoryKeys,
