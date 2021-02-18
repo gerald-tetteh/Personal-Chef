@@ -16,9 +16,14 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final _pages = [SearchPage(), FavouritesPage(), ContactPage()];
+  final _pages = [FavouritesPage(), SearchPage(), ContactPage()];
 
   final _bottomNaviagtionItems = [
+    BottomNavigationBarItem(
+      label: "",
+      activeIcon: Icon(Icons.favorite_border_rounded),
+      icon: Icon(Icons.favorite_border_rounded),
+    ),
     BottomNavigationBarItem(
       label: "",
       activeIcon: Icon(
@@ -30,17 +35,12 @@ class _HomePageState extends State<HomePage> {
     ),
     BottomNavigationBarItem(
       label: "",
-      activeIcon: Icon(Icons.favorite_border_rounded),
-      icon: Icon(Icons.favorite_border_rounded),
-    ),
-    BottomNavigationBarItem(
-      label: "",
       activeIcon: Icon(Icons.support_agent_outlined),
       icon: Icon(Icons.support_agent_outlined),
     ),
   ];
 
-  var _currentIndex = 0;
+  var _currentIndex = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +48,7 @@ class _HomePageState extends State<HomePage> {
       color: ColorUtil.white,
       child: SafeArea(
         child: Scaffold(
+          resizeToAvoidBottomInset: false,
           bottomNavigationBar: HomePage.isAndroid
               ? BottomNavigationBar(
                   currentIndex: _currentIndex,

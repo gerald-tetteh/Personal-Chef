@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
     ]);
     return MaterialApp(
       title: "Personal Chef",
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
         fontFamily: "OpenSans",
