@@ -14,6 +14,9 @@ class RecipeProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  List<Recipe> _categoryRecipes = [];
+  List<Recipe> get categoryRecipes => [..._categoryRecipes];
+
   bool _isLoading = false;
   bool get isLoading => _isLoading;
   set isLoading(bool value) {
@@ -43,6 +46,29 @@ class RecipeProvider with ChangeNotifier {
     } catch (e) {
       print(e.toString());
       isLoading = false;
+    }
+  }
+
+  Future<void> categorySearch(String apiUrl, String categoryName) async {
+    categoryName = categoryName.toLowerCase();
+    if (categoryName == "quickly") {
+      categoryName = "snack";
+    }
+    var searchUrl =
+        "https://api.spoonacular.com/recipes/complexSearch?$apiUrl=$categoryName&number=100&apiKey=${HiddenDetails.apikey}";
+    try {
+      final response = await http.get(searchUrl);
+      final responseBody = jsonDecode(response.body) as Map<String, Object>;
+      final results = responseBody["results"] as List<dynamic>;
+      _categoryRecipes = results.map((recipie) {
+        return Recipe(
+          id: recipie["id"],
+          imageUrl: recipie["image"],
+          title: recipie["title"],
+        );
+      }).toList();
+    } catch (e) {
+      print(e.toString());
     }
   }
 }

@@ -34,6 +34,7 @@ class SearchGrid extends StatelessWidget {
                 color: itemDetails[0],
                 imagePath: itemDetails[1],
                 text: _categoryKeys[index],
+                apiUrl: itemDetails[2],
               );
             },
             childCount: 6,

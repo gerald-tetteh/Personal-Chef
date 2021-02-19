@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:personal_chef/utils/colors_util.dart';
 import 'package:provider/provider.dart';
 
 import './pages/home.dart';
+import './pages/category_detail_page.dart';
 import './providers/RecipeProvider.dart';
 
 void main() {
@@ -22,12 +24,22 @@ class MyApp extends StatelessWidget {
         title: "Personal Chef",
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          primarySwatch: Colors.green,
+          accentColor: Colors.amber,
           fontFamily: "OpenSans",
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+          appBarTheme: AppBarTheme(
+            elevation: 0,
+            backgroundColor: Colors.transparent,
+            iconTheme: IconThemeData(
+              color: Colors.amber,
+            ),
+          ),
         ),
         initialRoute: "/",
         routes: {
           "/": (ctx) => HomePage(),
+          CategoryDetailPage.routeName: (ctx) => CategoryDetailPage(),
         },
       ),
     );

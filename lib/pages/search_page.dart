@@ -62,7 +62,7 @@ class SearchPage extends StatelessWidget {
                 child: Consumer(
                   builder: (context, RecipeProvider consumerprovider, child) {
                     if (consumerprovider.isLoading) {
-                      return CircularProgressIndicator();
+                      return CircularProgressIndicator.adaptive();
                     }
                     return consumerprovider.recipes.isEmpty
                         ? SearchGrid(
