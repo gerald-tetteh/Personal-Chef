@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:cupertino_icons/cupertino_icons.dart';
 import 'package:personal_chef/utils/default_util.dart';
 import 'package:personal_chef/utils/text_util.dart';
 import 'package:provider/provider.dart';
@@ -10,7 +9,6 @@ import 'package:provider/provider.dart';
 import '../utils/colors_util.dart';
 import '../providers/RecipeProvider.dart';
 import '../models/RecipeInformation.dart';
-import '../models/Ingredient.dart';
 
 class RecipeDetailPage extends StatelessWidget {
   static const routeName = "/recipe-detail";
