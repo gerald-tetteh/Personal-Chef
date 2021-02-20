@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import '../models/Recipe.dart';
+import '../models/RecipeInformation.dart';
+import '../models/Ingredient.dart';
 import '../../hiddenDetails.dart';
 
 class RecipeProvider with ChangeNotifier {
@@ -69,6 +71,41 @@ class RecipeProvider with ChangeNotifier {
       }).toList();
     } catch (e) {
       print(e.toString());
+    }
+  }
+
+  Future<RecipeInformation> getRecipeInformation(int id) async {
+    var searchUrl =
+        "https://api.spoonacular.com/recipes/$id/information?includeNutrition=false&apiKey=${HiddenDetails.apikey}";
+    try {
+      final response = await http.get(searchUrl);
+      final responseBody = jsonDecode(response.body) as Map<String, Object>;
+      final ingredientsJson =
+          responseBody["extendedIngredients"] as List<dynamic>;
+      final ingredients = ingredientsJson
+          .map((ingredient) => Ingredient(
+                id: ingredient["id"],
+                amount: ingredient["amount"],
+                image: ingredient["image"],
+                instruction: ingredient["originalString"],
+                nameClean: ingredient["nameClean"],
+                unit: ingredient["unit"],
+              ))
+          .toList();
+      return RecipeInformation(
+        id: responseBody["id"],
+        title: responseBody["title"],
+        image: responseBody["image"],
+        healthScore: responseBody["healthScore"],
+        pairingText: responseBody["pairingText"],
+        readyInMinutes: responseBody["readyInMinutes"],
+        servings: responseBody["servings"],
+        sourceName: responseBody["sourceName"],
+        ingredients: ingredients,
+      );
+    } catch (e) {
+      print(e.toString());
+      return RecipeInformation(ingredients: []);
     }
   }
 }

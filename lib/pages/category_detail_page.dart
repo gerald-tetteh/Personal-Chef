@@ -50,7 +50,7 @@ class CategoryDetailPage extends StatelessWidget {
                         Container(
                           margin: const EdgeInsets.only(bottom: 10),
                           child: Text(
-                            "Snacks",
+                            categoryName,
                             style: TextUtil.boldHeader,
                           ),
                         ),
