@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:personal_chef/utils/colors_util.dart';
 import 'package:provider/provider.dart';
 
 import './pages/home.dart';
 import './pages/category_detail_page.dart';
+import './pages/recipe_detail_page.dart';
 import './providers/RecipeProvider.dart';
+import './utils/text_util.dart';
 
 void main() {
   runApp(MyApp());
@@ -34,12 +35,14 @@ class MyApp extends StatelessWidget {
             iconTheme: IconThemeData(
               color: Colors.amber,
             ),
+            titleTextStyle: TextUtil.titleText,
           ),
         ),
         initialRoute: "/",
         routes: {
           "/": (ctx) => HomePage(),
           CategoryDetailPage.routeName: (ctx) => CategoryDetailPage(),
+          RecipeDetailPage.routeName: (ctx) => RecipeDetailPage(),
         },
       ),
     );

@@ -15,4 +15,9 @@ class TextUtil {
   static const bannerText = TextStyle(
     color: ColorUtil.white,
   );
+  static const titleText = TextStyle(
+    fontFamily: "Quicksand",
+    fontWeight: FontWeight.w700,
+    color: ColorUtil.greyDarken4,
+  );
 }
