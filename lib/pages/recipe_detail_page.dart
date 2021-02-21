@@ -1,12 +1,12 @@
-import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:personal_chef/utils/default_util.dart';
-import 'package:personal_chef/utils/text_util.dart';
 import 'package:provider/provider.dart';
 
 import '../utils/colors_util.dart';
+import '../utils/default_util.dart';
+import '../utils/text_util.dart';
+import '../components/recipe_detail_page/ingredients_list.dart';
+import '../components/recipe_detail_page/meal_column_details.dart';
 import '../providers/RecipeProvider.dart';
 import '../models/RecipeInformation.dart';
 
@@ -102,7 +102,7 @@ class RecipeDetailPage extends StatelessWidget {
                                     ),
                                     MealColumnDetails(
                                       text:
-                                          "${recipeInformation.servings.toInt()} servings",
+                                          "${recipeInformation.servings.toInt()} serving(s)",
                                       androidIcon: Icons.food_bank_outlined,
                                       iosIcon: Icons.food_bank_outlined,
                                     ),
@@ -113,8 +113,9 @@ class RecipeDetailPage extends StatelessWidget {
                           );
                         }),
                       ),
-                      Container(
-                        height: constraints.maxHeight * 0.46,
+                      IngredientsList(
+                        constraints: constraints,
+                        ingredients: recipeInformation.ingredients,
                       ),
                       Container(
                         height: constraints.maxHeight * 0.04,
@@ -136,31 +137,6 @@ class RecipeDetailPage extends StatelessWidget {
           ),
         );
       },
-    );
-  }
-}
-
-class MealColumnDetails extends StatelessWidget {
-  const MealColumnDetails({
-    Key key,
-    @required this.text,
-    @required this.androidIcon,
-    @required this.iosIcon,
-  }) : super(key: key);
-
-  final String text;
-  final IconData iosIcon;
-  final IconData androidIcon;
-
-  @override
-  Widget build(BuildContext context) {
-    final isAndroid = Platform.isAndroid;
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Icon(isAndroid ? androidIcon : iosIcon),
-        Text(text),
-      ],
     );
   }
 }

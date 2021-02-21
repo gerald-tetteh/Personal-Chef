@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class DefaultUtil {
   static final imageSizeUrl = "636x393";
+  static final ingredientImageSize = "500x500";
 
   static const Map<String, List> categories = {
     "Quickly": [Color(0xffffecb3), "assets/images/quick_food.jpg", "type"],
@@ -21,4 +22,7 @@ class DefaultUtil {
     }
     return "$subString1${DefaultUtil.imageSizeUrl}.png";
   }
+
+  static String setIngredientImageUrl(String image) =>
+      "https://spoonacular.com/cdn/ingredients_$ingredientImageSize/$image";
 }

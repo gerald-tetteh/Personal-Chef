@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../models/Recipe.dart';
 import '../../utils/colors_util.dart';
 import '../../utils/default_util.dart';
+import '../../pages/recipe_detail_page.dart';
 
 class SearchList extends StatelessWidget {
   final List<Recipe> recipes;
@@ -16,6 +17,9 @@ class SearchList extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.all(8.0),
             child: ListTile(
+              onTap: () => Navigator.of(context).pushNamed(
+                  RecipeDetailPage.routeName,
+                  arguments: recipes[index].id),
               leading: CircleAvatar(
                 backgroundColor: ColorUtil.green,
                 backgroundImage: NetworkImage(
