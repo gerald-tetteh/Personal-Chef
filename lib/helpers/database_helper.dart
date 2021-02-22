@@ -29,10 +29,23 @@ class DBHelper {
       ''');
   }
 
+  static Future<List<Map<String, dynamic>>> getData() async {
+    final database = await DBHelper.database();
+    return database.rawQuery('''
+      SELECT * FROM favourite_recipes;
+      ''');
+  }
+
+  static Future<List<Map<String, dynamic>>> getItemById(int id) async {
+    final database = await DBHelper.database();
+    return database
+        .rawQuery("SELECT id FROM favourite_recipes WHERE id = ?", [id]);
+  }
+
   static Future<void> delete(int id) async {
     final database = await DBHelper.database();
     database.rawDelete('''
-      DELETE FROM favourite_recipe WHERE id = ?
+      DELETE FROM favourite_recipes WHERE id = ?
       ''', [id]);
   }
 }
