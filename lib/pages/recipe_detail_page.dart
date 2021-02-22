@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -36,6 +38,7 @@ class RecipeDetailPage extends StatelessWidget {
         }
         final recipeInformation = snapshot.data;
         final themeData = Theme.of(context);
+        final isAndroid = Platform.isAndroid;
         return Container(
           color: ColorUtil.white,
           child: SafeArea(
@@ -50,6 +53,16 @@ class RecipeDetailPage extends StatelessWidget {
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
+                actions: [
+                  IconButton(
+                    icon: Icon(
+                      isAndroid
+                          ? Icons.favorite_border_outlined
+                          : CupertinoIcons.heart,
+                    ),
+                    onPressed: () {},
+                  ),
+                ],
               ),
               body: LayoutBuilder(
                 builder: (context, constraints) {
