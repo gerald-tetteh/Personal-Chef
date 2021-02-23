@@ -9,7 +9,7 @@ import '../utils/text_util.dart';
 class FavouritesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<RecipeProvider>(context, listen: false);
+    final provider = Provider.of<RecipeProvider>(context);
     return Container(
       child: FutureBuilder<List<Recipe>>(
         future: provider.getFavouritesList(),
