@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:personal_chef/models/Recipe.dart';
 import 'package:provider/provider.dart';
 
 import '../utils/colors_util.dart';
@@ -36,6 +39,7 @@ class RecipeDetailPage extends StatelessWidget {
         }
         final recipeInformation = snapshot.data;
         final themeData = Theme.of(context);
+        final isAndroid = Platform.isAndroid;
         return Container(
           color: ColorUtil.white,
           child: SafeArea(
@@ -50,6 +54,29 @@ class RecipeDetailPage extends StatelessWidget {
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
+                actions: [
+                  Consumer<RecipeProvider>(
+                    builder: (context, provider, child) {
+                      return IconButton(
+                        icon: Icon(
+                          isAndroid
+                              ? (!(provider.isFavourite)
+                                  ? Icons.favorite_border_outlined
+                                  : Icons.favorite_outlined)
+                              : (!(provider.isFavourite)
+                                  ? CupertinoIcons.heart
+                                  : CupertinoIcons.heart_fill),
+                        ),
+                        onPressed: () async =>
+                            await provider.toogleIsFavourite(Recipe(
+                          id: recipeInformation.id,
+                          imageUrl: recipeInformation.image,
+                          title: recipeInformation.title,
+                        )),
+                      );
+                    },
+                  ),
+                ],
               ),
               body: LayoutBuilder(
                 builder: (context, constraints) {

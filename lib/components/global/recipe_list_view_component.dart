@@ -5,23 +5,23 @@ import '../../utils/text_util.dart';
 import '../../models/Recipe.dart';
 import '../../pages/recipe_detail_page.dart';
 
-class CategoryListView extends StatelessWidget {
-  const CategoryListView({
+class RecipeListViewComponent extends StatelessWidget {
+  const RecipeListViewComponent({
     Key key,
-    @required this.categoryRecipes,
+    @required this.recipeList,
   }) : super(key: key);
 
-  final List<Recipe> categoryRecipes;
+  final List<Recipe> recipeList;
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: categoryRecipes.length,
+      itemCount: recipeList.length,
       itemBuilder: (context, index) {
         return GestureDetector(
           onTap: () => Navigator.of(context).pushNamed(
               RecipeDetailPage.routeName,
-              arguments: categoryRecipes[index].id),
+              arguments: recipeList[index].id),
           child: Container(
             margin: EdgeInsets.only(
               bottom: 10,
@@ -37,7 +37,7 @@ class CategoryListView extends StatelessWidget {
                     image: DecorationImage(
                       image: NetworkImage(
                         DefaultUtil.setImageUrlRecipe(
-                            categoryRecipes[index].imageUrl),
+                            recipeList[index].imageUrl),
                       ),
                       fit: BoxFit.cover,
                     ),
@@ -57,7 +57,7 @@ class CategoryListView extends StatelessWidget {
                       ),
                     ),
                     child: Text(
-                      categoryRecipes[index].title,
+                      recipeList[index].title,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
                       style: TextUtil.bannerText,

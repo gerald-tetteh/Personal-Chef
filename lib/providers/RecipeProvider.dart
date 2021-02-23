@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 import '../models/Recipe.dart';
 import '../models/RecipeInformation.dart';
 import '../models/Ingredient.dart';
+import '../helpers/database_helper.dart';
 import '../../hiddenDetails.dart';
 
 class RecipeProvider with ChangeNotifier {
@@ -24,6 +25,23 @@ class RecipeProvider with ChangeNotifier {
   set isLoading(bool value) {
     _isLoading = value;
     notifyListeners();
+  }
+
+  bool _isFavourite = false;
+  bool get isFavourite => _isFavourite;
+  Future<void> toogleIsFavourite(Recipe recipe) async {
+    _isFavourite = !_isFavourite;
+    if (_isFavourite) {
+      await DBHelper.insert(recipe);
+    } else {
+      await DBHelper.delete(recipe.id);
+    }
+    notifyListeners();
+  }
+
+  Future<List<Recipe>> getFavouritesList() async {
+    final recipes = await DBHelper.getData();
+    return Recipe.mapToRecipe(recipes);
   }
 
   Future<void> complexSearch(String keyword) async {
@@ -92,6 +110,7 @@ class RecipeProvider with ChangeNotifier {
                 unit: ingredient["unit"],
               ))
           .toList();
+      _isFavourite = (await DBHelper.getItemById(id)).isNotEmpty;
       return RecipeInformation(
         id: responseBody["id"],
         title: responseBody["title"],
