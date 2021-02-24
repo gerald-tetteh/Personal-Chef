@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 class DefaultUtil {
-  static final imageSizeUrl = "636x393";
-  static final ingredientImageSize = "500x500";
+  static const imageSizeUrl = "636x393";
+  static const ingredientImageSize = "500x500";
+
+  static const githubUrl = "https://github.com/gerald-tetteh/Personal-Chef";
+  static const email = "addodevelop@gmail.com";
+  static const linkedInProfile =
+      "https://www.linkedin.com/in/gerald-addo-tetteh-a28101182";
 
   static const Map<String, List> categories = {
     "Quickly": [Color(0xffffecb3), "assets/images/quick_food.jpg", "type"],
@@ -25,4 +31,23 @@ class DefaultUtil {
 
   static String setIngredientImageUrl(String image) =>
       "https://spoonacular.com/cdn/ingredients_$ingredientImageSize/$image";
+
+  static SnackBar showSnackBar(String text, bool isAndroid) {
+    return SnackBar(
+      content: Row(
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(right: 8.0),
+            child: Icon(
+              isAndroid
+                  ? Icons.error_outline
+                  : CupertinoIcons.exclamationmark_triangle,
+              color: Colors.red,
+            ),
+          ),
+          Text(text),
+        ],
+      ),
+    );
+  }
 }
