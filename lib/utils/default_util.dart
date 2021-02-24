@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 class DefaultUtil {
+  static const unknown = "Unkown";
+
   static const imageSizeUrl = "636x393";
   static const ingredientImageSize = "500x500";
 
@@ -49,5 +51,12 @@ class DefaultUtil {
         ],
       ),
     );
+  }
+
+  static String checkString(String text) {
+    if (text == null || text.isEmpty) {
+      return DefaultUtil.unknown;
+    }
+    return text;
   }
 }

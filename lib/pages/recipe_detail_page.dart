@@ -10,6 +10,7 @@ import '../utils/default_util.dart';
 import '../utils/text_util.dart';
 import '../components/recipe_detail_page/ingredients_list.dart';
 import '../components/recipe_detail_page/meal_column_details.dart';
+import '../components/global/empty_widget.dart';
 import '../providers/RecipeProvider.dart';
 import '../models/RecipeInformation.dart';
 
@@ -38,6 +39,21 @@ class RecipeDetailPage extends StatelessWidget {
           );
         }
         final recipeInformation = snapshot.data;
+        if (recipeInformation.ingredients.isEmpty) {
+          return Container(
+            color: ColorUtil.white,
+            child: SafeArea(
+              top: false,
+              child: Scaffold(
+                appBar: AppBar(),
+                backgroundColor: ColorUtil.white,
+                body: EmptyWidgetComponent(
+                  text: "An error Occured :(\nCheck Your Internet Connection",
+                ),
+              ),
+            ),
+          );
+        }
         final themeData = Theme.of(context);
         final isAndroid = Platform.isAndroid;
         return Container(
