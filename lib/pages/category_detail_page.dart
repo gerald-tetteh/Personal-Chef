@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import '../utils/colors_util.dart';
 import '../components/global/recipe_list_view.dart';
+import '../components/global/empty_widget.dart';
 import '../providers/RecipeProvider.dart';
 
 class CategoryDetailPage extends StatelessWidget {
@@ -32,6 +33,12 @@ class CategoryDetailPage extends StatelessWidget {
                   );
                 }
                 final categoryRecipes = provider.categoryRecipes;
+                if (categoryRecipes.isEmpty) {
+                  return EmptyWidgetComponent(
+                    text:
+                        "Could Not Retrieve Data Check Your Internet Connection",
+                  );
+                }
                 return RecipeListView(
                   title: categoryName,
                   recipesList: categoryRecipes,

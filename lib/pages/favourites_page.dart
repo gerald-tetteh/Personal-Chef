@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import '../providers/RecipeProvider.dart';
 import '../components/global/recipe_list_view.dart';
 import '../models/Recipe.dart';
-import '../utils/text_util.dart';
+import '../components/global/empty_widget.dart';
 
 class FavouritesPage extends StatelessWidget {
   @override
@@ -21,11 +21,8 @@ class FavouritesPage extends StatelessWidget {
           }
           return LayoutBuilder(builder: (context, constraints) {
             if (snapshot.data.isEmpty) {
-              return Center(
-                child: Text(
-                  "Nothing Here Yet :)",
-                  style: TextUtil.boldHeader,
-                ),
+              return EmptyWidgetComponent(
+                text: "Nothing Here Yet :)",
               );
             }
             return RecipeListView(

@@ -88,7 +88,12 @@ class IngredientsListItem extends StatelessWidget {
                 ),
               ),
             ),
-            Expanded(child: Text(ingredients[index].nameClean.capitalize())),
+            Expanded(
+              child: Text(
+                DefaultUtil.checkString(ingredients[index].nameClean)
+                    .capitalize(),
+              ),
+            ),
           ],
         ),
       );
