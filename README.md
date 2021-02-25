@@ -4,6 +4,9 @@ This project is a application that provides teh user with the recipes for
 available food items from the [Spoonacular API](https://spoonacular.com/food-api).
 The application is a mobile application built with flutter for both android and IOS devices.
 
+![Android Home Page](./assets/images/Android_Home.png) ![IOS Home Page](./assets/images/Ios_Home.png)
+![Android Detail Page](./assets/images/Android_Detail.png) ![IOS Category Page](./assets/images/Ios_Category.png)
+
 ## Requirements
 * Internet Connection
 
