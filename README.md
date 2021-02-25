@@ -1,15 +1,25 @@
-# personal_chef
+# Personal Chef
 
-A new Flutter project.
+This project is a application that provides teh user with the recipes for
+available food items from the [Spoonacular API](https://spoonacular.com/food-api).
+The application is a mobile application built with flutter for both android and IOS devices.
 
-## Getting Started
+## Requirements
+* Internet Connection
 
-This project is a starting point for a Flutter application.
+### Third Party Packages
+- [provider](https://pub.dev/packages/provider)
+- [http](https://pub.dev/packages/http)
+- [sqflite](https://pub.dev/packages/sqflite)
+- [path](https://pub.dev/packages/path)
+- [url_launcher](https://pub.dev/packages/url_launcher)
+- [font_awesome_flutter](https://pub.dev/packages/font_awesome_flutter)
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+---
+##### Developer
+* Email: addodevelop@gmail.com
+* [Website](https://gerald-addo.herokuapp.com)
+* [LinkedIn](https://www.linkedin.com/in/gerald-addo-tetteh-a28101182)
 
 For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
