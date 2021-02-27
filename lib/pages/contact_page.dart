@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import '../utils/colors_util.dart';
 import '../utils/text_util.dart';
@@ -21,7 +22,10 @@ class _ContactPageState extends State<ContactPage>
         child: CircleAvatar(
           backgroundColor: ColorUtil.green,
           radius: radius,
-          backgroundImage: AssetImage("assets/images/profile_picture.jpg"),
+          child: Icon(
+            FontAwesomeIcons.hammer,
+            size: 0.6 * radius,
+          ),
         ),
       ),
       Text(
